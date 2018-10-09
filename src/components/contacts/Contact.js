@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteContact } from "../../actions/contactActions";
 
 class Contact extends Component {
   state = {
@@ -9,6 +11,10 @@ class Contact extends Component {
 
   onDeleteClick = id => {
     //// DELETE CONTACT ////
+
+    // use the deleteContact method mapped from the redux state to the
+    // props of this component instance
+    this.props.deleteContact(id);
   };
 
   render() {
@@ -18,7 +24,7 @@ class Contact extends Component {
     return (
       <div className="card card-body mb-3">
         <h4>
-          {name}{' '}
+          {name}{" "}
           <i
             onClick={() =>
               this.setState({
@@ -26,21 +32,21 @@ class Contact extends Component {
               })
             }
             className="fas fa-sort-down"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
           />
           <i
             className="fas fa-times"
-            style={{ cursor: 'pointer', float: 'right', color: 'red' }}
+            style={{ cursor: "pointer", float: "right", color: "red" }}
             onClick={this.onDeleteClick.bind(this, id)}
           />
           <Link to={`contact/edit/${id}`}>
             <i
               className="fas fa-pencil-alt"
               style={{
-                cursor: 'pointer',
-                float: 'right',
-                color: 'black',
-                marginRight: '1rem'
+                cursor: "pointer",
+                float: "right",
+                color: "black",
+                marginRight: "1rem"
               }}
             />
           </Link>
@@ -57,7 +63,13 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  deleteContact: PropTypes.object.isRequired
 };
 
-export default Contact;
+// we're not bringing in  any data, not mapping any state to props, so null
+// we are bringing in an action though, deleteContact
+export default connect(
+  null,
+  { deleteContact }
+)(Contact);
