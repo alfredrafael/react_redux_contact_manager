@@ -64,7 +64,7 @@ class Contact extends Component {
 
 Contact.propTypes = {
   contact: PropTypes.object.isRequired,
-  deleteContact: PropTypes.object.isRequired
+  deleteContact: PropTypes.func.isRequired
 };
 
 // we're not bringing in  any data, not mapping any state to props, so null

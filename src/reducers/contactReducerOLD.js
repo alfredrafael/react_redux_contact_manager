@@ -1,40 +1,40 @@
-import {
-  GET_CONTACTS,
-  GET_CONTACT,
-  ADD_CONTACT,
-  DELETE_CONTACT,
-  UPDATE_CONTACT
-} from "../actions/types";
+import { GET_CONTACTS, ADD_CONTACT, DELETE_CONTACT } from "../actions/types";
 
 // each reducer has its own initial state
 // to access the contacts within this state,
 // with redux we need to define action types
 const initialState = {
   contacts: [
-    //we'llbe getting the data from json placeholder api
-  ],
-  // this partof the current state will represent the current contact being "viewed",
-  // useful for a "details" page or in this case, the edit page
-  contact: {}
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@gmail.com",
+      phone: "555-555-5555"
+    },
+    {
+      id: 2,
+      name: "Karen Williams",
+      email: "karen@gmail.com",
+      phone: "444-444-4444"
+    },
+    {
+      id: 3,
+      name: "Henry Johnson",
+      email: "henry@gmail.com",
+      phone: "333-333-333"
+    }
+  ]
 };
 
 // just like inthe context API,evaluate actions by their type
 export default function(state = initialState, action) {
   switch (action.type) {
-    // with real API call from json placeholder:
+    // with hardcoded data:
     case GET_CONTACTS:
-      // action.payload contains the contacts array resulting from
-      // the get request done with axios to the json placeholder api
+      // how do we get this into our contacts component?
+      // with connect from react-redux
       return {
-        ...state,
-        contacts: action.payload
-      };
-    case GET_CONTACT:
-      // action.payload contains the contacts array resulting from
-      // the get request done with axios to the json placeholder api
-      return {
-        ...state,
-        contact: action.payload
+        ...state
       };
     case ADD_CONTACT:
       // action.payload contains whole new contact
